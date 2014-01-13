@@ -65,31 +65,242 @@
 				<section>
 					
 					<blockquote cite="http://roy.gbiv.com/untangled/2008/rest-apis-must-be-hypertext-driven">
-						<h3>&ldquo;REST is software design on the scale of decades: </h3>
+						<h3>&ldquo;REST is software design on the scale of decades:</h3>
 						<h3>every detail is intended to promote 
 							<span class="ING">software longevity</span> and 
-							<span class="ING">independent evolution</span>.&rdquo;</h3>
+							<span class="ING">independent evolution</span>&rdquo;</h3>
 					</blockquote>
 				</h3>
 				</section>	
 				<section>	
 					<blockquote cite="http://roy.gbiv.com/untangled/2008/rest-apis-must-be-hypertext-driven">
-						<h3>&ldquo;Many of the constraints are directly opposed to short-term efficiency.</h3>
-						<h3>Unfortunately, people are fairly 
-							<span class="ING">good at short-term design</span>, and usually 
-							<span class="ING">awful at long-term design</span>.&rdquo;</h3>
+						<h3>&ldquo;Many of the constraints<br>are directly opposed<br>to short-term efficiency.</h3>
+						<h3>people are fairly<br>
+							<span class="ING">good at short-term design</span>, and usually<br>
+							<span class="ING">awful at long-term design</span>&rdquo;</h3>
 					</blockquote>
 				</h3>
 				</section>	
 				<section>
-					<h2>Design on the scale of decades</h2>
-					<img src="./images/plngnyc.jpg" alt="central_park">
+					<section>
+						<h2>Design on the scale of decades</h2>
+						<img src="./images/plngnyc.jpg" alt="central_park">
+					</section>
+					<section>
+						<h2>Design on the scale of decades</h2>
+						<img src="./images/iphone-lineup-950-v4.jpg" alt="iphone">
+					</section>
+					<section>
+						<h2>Design on the scale of decades</h2>
+						<img src="./images/big-amazon.jpg" width="100%" alt="amazon">
+					</section>
 				</section>
 
 				<!-- First Examples -->
 				<section>
 					<p>context</p>
 					<h2>Examples</h2>
+				</section>
+				<section>
+					<section>
+						<h2>https://api.github.com</h2>
+					</section>
+					<section>
+						<pre>
+							<code data-trim contenteditable>
+curl -i https://api.github.com
+HTTP/1.1 200 OK
+Server: GitHub.com
+Content-Type: application/json; charset=utf-8
+Status: 200 OK
+
+{
+  "current_user_url": "https://api.github.com/user",
+  "authorizations_url": "https://api.github.com/authorizations",
+  "repository_url": "https://api.github.com/repos/{owner}/{repo}",
+  ...
+}
+							</code>
+						</pre>
+					</section>	
+					<section>
+						<pre>
+							<code data-trim contenteditable>
+curl -i https://api.github.com/repos/absynthmind/hypermedia-design
+HTTP/1.1 200 OK
+Server: GitHub.com
+Content-Type: application/json; charset=utf-8
+Status: 200 OK
+
+{
+  "id": 15635201,
+  "name": "hypermedia-design",
+  "full_name": "absynthmind/hypermedia-design",
+  "owner": {
+    "login": "absynthmind",
+    "id": 727855,
+    "avatar_url": "https://gravatar.com/avatar/...",
+    "followers_url": "https://api.github.com/users/absynthmind/followers",
+    ...
+  },
+  "git_refs_url": "https://api.github.com/repos/absynthmind/hypermedia-design/git/refs{/sha}",
+  "git_commits_url": "https://api.github.com/repos/absynthmind/hypermedia-design/git/commits{/sha}",
+  ...
+}
+							</code>
+						</pre>
+					</section>
+					<section>
+						<pre>
+							<code data-trim contenteditable>
+curl -i https://api.github.com/repos/absynthmind/hypermedia-design/git/refs
+HTTP/1.1 200 OK
+Server: GitHub.com
+Content-Type: application/json; charset=utf-8
+Status: 200 OK
+
+[
+  {
+	...
+  },
+  {
+    "ref": "refs/heads/master",
+    "url": "https://api.github.com/repos/absynthmind/hypermedia-design/git/refs/heads/master",
+    "object": {
+      "sha": "b3b2d4d5b7362635c670d7f2033d9c1dc17b1416",
+      "type": "commit",
+      "url": "https://api.github.com/repos/absynthmind/hypermedia-design/git/commits/b3b2d4d5b7362635c670d7f2033d9c1dc17b1416"
+    }
+  }
+]
+							</code>
+						</pre>
+					</section>
+					<section>
+						<pre>
+							<code data-trim contenteditable>
+curl -i https://api.github.com/repos/absynthmind/hypermedia-design/git/commits/b3b2d4d5b7362635c670d7f2033d9c1dc17b1416
+HTTP/1.1 200 OK
+Server: GitHub.com
+Content-Type: application/json; charset=utf-8
+Status: 200 OK
+
+{
+  "committer": {
+    "name": "Ronk",
+    "email": "ron.kersic@gmail.com",
+    "date": "2014-01-13T10:39:22Z"
+  },
+  "message": "added introduction section",
+  "parents": [
+    {
+      "sha": "8cfcb1d88e1546da9a3fd7407c96ad66d6325e78",
+      "url": "https://api.github.com/repos/absynthmind/hypermedia-design/git/commits/8cfcb1d88e1546da9a3fd7407c96ad66d6325e78",
+      "html_url": "https://github.com/absynthmind/hypermedia-design/commits/8cfcb1d88e1546da9a3fd7407c96ad66d6325e78"
+    }
+  ]
+}
+							</code>
+						</pre>
+					</section>
+					<section>
+						<pre>
+							<code data-trim contenteditable>
+var api = require('traverson').json.from('https://api.github.com/')
+
+api.newRequest()
+	.follow('repository_url', 'commits_url')
+	.withTemplateParameters({
+	    owner: 'absynthmind',
+	    repo:'hypermedia-design',
+	    sha: 'b3b2d4d5b7362635c670d7f2033d9c1dc17b1416'
+	}).getResource(function(err, resource) {
+          if (err) { console.log(err); return; }
+          console.log(resource)
+	})
+							</code>
+						</pre>
+					</section>
+				</section>
+				<section>
+					<section>
+						<h2>Hypertext Application Language</h2>
+						<p>https://gist.github.com/mikekelly/1975080</p>
+					</section>
+					<section>
+						<pre>
+							<code data-trim contenteditable>
+GET http://api.alttekpub.com
+
+{
+  "_links": {
+    "self": { "href": "..." },
+    "productions": { "href": "..." }
+  }
+}
+							</code>
+						</pre>
+					</section>
+					<section>
+						<pre>
+							<code data-trim contenteditable>
+{
+  "_links": {
+      "self": { "href": "..." },
+      "filter": { "href": "...{?categories}" } 
+  },
+  "categories": ["Microsoft", "Ruby", "Javascript", "Mobile"],
+  "_embedded": {
+       "videos": [{
+         "_links": {
+           "self": { "href": "..." },
+           "episodes": { "href": "..." }
+         },
+         "title": "Real World ASP.NET MVC3",
+         "description": "In this advanced, somewhat-opinionated production you'll get your very own startup off the ground using ASP.NET MVC 3...",
+         "permitted": true
+       },
+    ...
+    }]
+  }
+}
+							</code>
+						</pre>
+					</section>
+					<section>
+						<pre>
+							<code data-trim contenteditable>
+{
+  "_links": {
+    "self": { "href": "..." }
+  },
+  "title": "Real World ASP.NET MVC3",
+  "description": "In this advanced, somewhat-opinionated production you'll get your very own startup off the ground using ASP.NET MVC 3...",
+  "permitted": true,
+  "_embedded": {
+    "episodes": [{
+      "_links": {
+        "self": { "href": "..." },
+        "media": [{
+          "type": "video/webm; codecs='vp8.0, vorbis'",
+          "href": "..."
+        },{
+          "type": "video/ogg; codecs='theora, vorbis'",
+          "href": "..."
+        }] 
+    },
+    ...
+							</code>
+						</pre>
+					</section>
+				</section>
+				<section>
+					<h2>Hypermedia</h2>
+					<blockquote cite="https://gist.github.com/prathe/1963766">
+						<h3>&ldquo;the simultaneous presentation of<br><span class="ING">information and controls</span></h3>
+						<h3>such that</h3> 
+						<h3>the information becomes the affordance through which the (client) obtains<br><span class="ING">choices and selects actions</span>&rdquo;</h3>
+					</blockquote>
 				</section>
 
 				<!-- Design -->

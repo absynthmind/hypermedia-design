@@ -6,8 +6,10 @@ hypermedia-design
 ## Context
 
 ### The rest of REST
-Representational State Transfer (REST) is a software architectural style that describes how to construct network-based software applications such that they have the best characteristics of the Web. It's very easy to get *most* of these characteristics nowadays. With tools and frameworks available to pretty much any current computing platform we can build a client-server, stateless, non-shared caching, layered system that relies on location-based identifiers (URL), that can be included into the data itself (HTML) and that can be retrieved by means of a general protocol (HTTP) (picture TesselMachine)
+#### The current plateau
+Representational State Transfer (REST) is a software architectural style that describes how to construct network-based software applications such that they have the best characteristics of the Web. It's very easy to get *most* of these characteristics nowadays. With tools and frameworks available to pretty much any current computing platform (tessel.io) we can build a client-server, stateless, non-shared caching, layered system that relies on location-based identifiers (URL), that can be included into the data itself (HTML) and that can be retrieved by means of a general protocol (HTTP).
 
+#### The learning curve
 Yes, we went thru a learning curve (picture RMM - http://martinfowler.com/articles/richardsonMaturityModel.html) but we have reached a plateau of sensibility and practicability. On the RMM: POST serves many useful purposes in HTTP, including the general purpose of “this action isn’t worth standardising (RMM 1, 2). ING banking app is at RMM 1.5, but we're hitting RMM 2
 
 Still, we are missing out on the one crucial aspect of REST... 
@@ -20,11 +22,11 @@ If you don't care what happens to your product years after it is deployed, or at
 The WWW is an example; HTML was specified in 1990 (HTML4 in 1997), HTTP in 1991 (0.9) and 1996 (1.1).
 
 #### It's hard (but not difficult)
-(picture rugged wilderness picture)
-
 "Many of the (REST) constraints are directly opposed to short-term efficiency. Unfortunately, people are fairly good at short-term design, and usually awful at long-term design"
 
-An hypermedia API requires design effort; just like good UX or city planning. It also requires a "do not break pledge"
+An hypermedia API requires design effort; just like good UX or city planning. NY Central park: designed to have "separate circulation" systems for pedestrians, horseback riders, and pleasure vehicles. The "crosstown" commercial traffic was entirely concealed in sunken roadways, (today called "transverses"), screened with densely planted shrub belts so as to maintain a rustic ambiance. When cars were becoming commonplace, bringing with them their burden of pollution, and people's attitudes were beginning to change. No longer were parks to be used only for walks and picnics in an idyllic environment, but now also for sports, and similar recreation.
+
+It also requires a "do not break pledge"
 
 #### Coupling is the enemy
 Or actually, implicit assumptions are the enemy. Assumptions about the objects implementing the API, about the URL (and URL patterns) that can be identified with, and the methods that be lavished on them. 
