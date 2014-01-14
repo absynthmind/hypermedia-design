@@ -224,8 +224,7 @@ api.newRequest()
 				</section>
 				<section>
 					<section>
-						<h2>Hypertext Application Language</h2>
-						<p>https://gist.github.com/mikekelly/1975080</p>
+						<h2>http://haltalk.herokuapp.com</h2>
 					</section>
 					<section>
 						<pre>
@@ -295,22 +294,106 @@ GET http://api.alttekpub.com
 					</section>
 				</section>
 				<section>
-					<h2>Hypermedia</h2>
-					<blockquote cite="https://gist.github.com/prathe/1963766">
-						<h3>&ldquo;the simultaneous presentation of<br><span class="ING">information and controls</span></h3>
-						<h3>such that</h3> 
-						<h3>the information becomes the affordance through which the (client) obtains<br><span class="ING">choices and selects actions</span>&rdquo;</h3>
-					</blockquote>
+					<section>
+						<h2>Hypermedia</h2>
+						<blockquote cite="https://gist.github.com/prathe/1963766">
+							<h3>&ldquo;the simultaneous presentation of<br><span class="ING">information and controls</span></h3>
+							<h3>such that</h3> 
+							<h3>the information becomes the affordance through which the (client) obtains<br><span class="ING">choices and selects actions</span>&rdquo;</h3>
+						</blockquote>
+					</section>
+					<section>
+						<h2><span class="ING">Coupling</span> is the enemy</h2>
+						<h2><span class="ING">Assumptions</span> are the<br>mother of all evil</h2>
+					</section>	
+					<section>
+						<h2>Pledge to not breaking clients</h2>
+						<pre>
+							<code data-trim contenteditable>
+{
+  "resources": {
+    "core": {
+      "limit": 60,
+      "remaining": 58,
+      "reset": 1389681064
+    },
+    "search": {
+      "limit": 5,
+      "remaining": 5,
+      "reset": 1389677567
+    }
+  },
+  "rate": {
+    "limit": 60,
+    "remaining": 58,
+    "reset": 1389681064
+  }
+}
+							</code>
+						</pre>
+						<p>https://api.github.com/rate_limit</p>
+					</section>
 				</section>
 
 				<!-- Design -->
 				<section>
-					<h2>Design</h2>
+					<p>Design</p>
+					<h2>Approach</h2>
+				</section>
+				<section>
+					<h2>Five Steps</h2>
+					<ol>
+						<li>Evaluate business processes</li>
+						<li>Create state machine</li>
+						<li><span class="ING">Evaluate media types</span></li>
+						<li><span class="ING">Create media types</span></li>
+						<li>Build</li>
+					</ol>
+				</section>
+				<section>
+					<section>
+						<h2>Evaluate business processes</h2>
+						<h3>Job-to-be-Done thinking</h3>
+					</section>
+					<section>
+						<img src="./images/drill.png" alt="drill">
+						<blockquote cite="https://gist.github.com/prathe/1963766">
+							&ldquo;People don't want a 1/4'' drill<br>They want a 1/4'' hole&rdquo;
+					</section>
+					<section>
+						<img src="./images/experience_map.png" alt="experience_map">
+					</section>
+					<section>
+						<h2>The journey of the user through the different touchpoints that <span class="ING">afford and characterise</span> her interactions</h2>
+					</section>	
+					<section>
+						<h2>Touchpoint  /ˈtʌtʃpɔɪnt/</h2>
+						<h3>a point of interaction involving a specific need in a specific time and place</h3>
+						<h3 class="fragment">A channel is a medium of interaction with customers or users</h3>
+					</section>
+					<section>
+						<img src="./images/schorem.png" alt="schorem">
+					</section>
+					<section>
+						<img src="./images/service_blueprint.png" alt="service_blueprint">
+					</section>
+					<section>
+						<h2>A great API<br><span class="ING">understands its audience</span></h2>
+					</section>
+					<section>
+						<img src="./images/iedereen_is_designer.png" alt="iedereen_is_designer">
+					</section>
+				</section>
+				<section>
+					<section>
+						<h2>Create state machine</h2>
+					</section>
 				</section>
 
-				<!-- Implementation -->
+				<!-- Build -->
 				<section>
-					<h2>Implementation</h2>
+					<p>Design</p>
+					<h2>Build</h2>
 				</section>	
 
 				<!-- Conclusion -->
